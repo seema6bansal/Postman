@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "3f1874c6-0662-40d4-84ba-40dbe604d1f5",
+		"name": "Billing order with CSV data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Billing Order",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ee6c48c9-0edb-4c89-8cbe-a8c91cd76224",
+						"exec": [
+							"//Before Body",
+							"//pm.environment.set(\"firstName\", \"Gaurav\");",
+							"//pm.environment.set(\"itemno\", 100);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f662591-ca7d-4031-877b-88e6274886d0",
+						"exec": [
+							"//After body /Test",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"//fname = pm.environment.get(\"firstName\");",
+							"//inum = pm.environment.get(\"itemno\");",
+							"",
+							"//.test(\"Validating response data :\", function () {",
+							"//    var jsonResponseData = pm.response.json();",
+							"    ",
+							"//    id = jsonResponseData.id;",
+							"    ",
+							"//    pm.environment.set(\"id\", id);",
+							"    ",
+							"//    pm.expect(jsonResponseData.firstName).to.eql(fname);",
+							"//    pm.expect(jsonResponseData.itemNumber).to.eql(inum);",
+							"//});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"id\": 0,\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"city\": \"{{city}}\",\r\n    \"zipCode\": \"{{zipCode}}\",\r\n    \"addressLine1\": \"{{addressLine1}}\",\r\n    \"addressLine2\": \"{{addressLine2}}\",\r\n    \"itemNumber\": {{itemNumber}},\r\n    \"comment\": \"{{comment}}\",\r\n    \"state\": \"{{state}}\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseurl}}:{{port}}/BillingOrder",
+					"protocol": "http",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Billing Oerder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseurl}}:{{port}}/BillingOrder/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Billing Order",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"id\": 0,\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"city\": \"{{city}}\",\r\n    \"zipCode\": \"{{zipCode}}\",\r\n    \"addressLine1\": \"{{addressLine1}}\",\r\n    \"addressLine2\": \"{{addressLine2}}\",\r\n    \"itemNumber\": {{newitemNumber}},\r\n    \"comment\": \"{{comment}}\",\r\n    \"state\": \"{{state}}\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseurl}}:{{port}}/BillingOrder/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Delete Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c60f5dc0-c160-43e3-b514-a67bba21f6bb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseurl}}:{{port}}/BillingOrder/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{baseurl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
